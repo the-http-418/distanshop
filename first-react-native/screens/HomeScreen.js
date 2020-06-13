@@ -14,21 +14,24 @@ export default class HomeScreen extends Component {
               <View style={styles.welcomeContainer}>
                 <Image
                   source={
-                    __DEV__
-                      ? require('../assets/images/shop.jpg')
-                      : require('../assets/images/robot-prod.png')
+                    require('../assets/images/shop.jpg')
                   }
                   style={styles.welcomeImage}
                 />
               </View>
+              <View style={styles.getStartedContainer}>
+                <Text style={styles.logo}>
+                SAFELYS
 
+                </Text>
+              </View>
               <View style={styles.getStartedContainer}>
                 <DevelopmentModeNotice />
               </View>
 
               <View style={styles.helpContainer}>
                 <TouchableOpacity onPress={handleHelpPress} style={styles.helpLink}>
-                  <Text style={styles.helpLinkText}>Help, it didn’t automatically reload!</Text>
+                  <Text style={styles.helpLinkText}>Visit our Online Website</Text>
                 </TouchableOpacity>
               </View>
             </ScrollView>
@@ -42,34 +45,16 @@ HomeScreen.navigationOptions = {
 };
 
 function DevelopmentModeNotice() {
-  if (__DEV__) {
-    const learnMoreButton = (
-      <Text onPress={handleLearnMorePress} style={[styles.codeHighlightContainer, styles.homeScreenFilename,styles.helpLinkText]}>
-        Explore!!
-      </Text>
-    );
     return (
       <>
       <Text style={styles.developmentModeText}>
-        Click here to see stores near you!
-      </Text>
-      <Text>
-         {learnMoreButton}
+        Click on the Explore Icon to see stores near you!
       </Text>
       </>
     );
-  } else {
-    return (
-      <Text style={styles.developmentModeText}>
-        You are not in development mode: your app will run at full speed.
-      </Text>
-    );
-  }
 }
 
-function handleLearnMorePress() {
-  WebBrowser.openBrowserAsync('https://docs.expo.io/versions/latest/workflow/development-mode/');
-}
+
 
 function handleHelpPress() {
   WebBrowser.openBrowserAsync(
@@ -78,6 +63,11 @@ function handleHelpPress() {
 }
 
 const styles = StyleSheet.create({
+  logo:{
+    color:'green',
+    fontSize:40,
+
+  },
   container: {
     flex: 1,
     backgroundColor: '#fff',
@@ -98,8 +88,8 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   welcomeImage: {
-    width: 100,
-    height: 80,
+    width: 200,
+    height: 150,
     resizeMode: 'contain',
     marginTop: 3,
     marginLeft: -10,
