@@ -4,6 +4,7 @@ import * as React from 'react';
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import DashboardScreen from '../screens/DashboardScreen';
+import ShopListScreen from '../screens/ShopListScreen';
 
 const BottomTab = createBottomTabNavigator();
 const INITIAL_ROUTE_NAME = 'Home';
@@ -22,6 +23,14 @@ export default function BottomTabNavigator({ navigation, route }) {
         options={{
           title: 'Home',
           tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-home" />,
+        }}
+      />
+      <BottomTab.Screen
+        name="ShopList"
+        component={ShopListScreen}
+        options={{
+          title: 'Explore',
+          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-cart" />,
         }}
       />
       <BottomTab.Screen
@@ -44,5 +53,7 @@ function getHeaderTitle(route) {
       return 'Home';
     case 'Dashboard':
       return 'Profile Dashboard';
+      case 'ShopList':
+        return 'Shops Near You';
   }
 }
