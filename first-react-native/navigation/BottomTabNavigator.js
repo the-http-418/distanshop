@@ -26,19 +26,19 @@ export default function BottomTabNavigator({ navigation, route }) {
         }}
       />
       <BottomTab.Screen
-        name="ShopList"
-        component={ShopListScreen}
-        options={{
-          title: 'Explore',
-          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-cart" />,
-        }}
-      />
-      <BottomTab.Screen
         name="StoreList"
         component={StoreListScreen}
         options={{
           title: 'Nearby',
           tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-cart" />,
+        }}
+      />
+      <BottomTab.Screen
+        name="ShopList"
+        component={ShopListScreen}
+        options={{
+          title: 'Offers',
+          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-heart" />,
         }}
       />
       <BottomTab.Screen
@@ -62,7 +62,7 @@ function getHeaderTitle(route) {
     case 'Dashboard':
       return 'Profile Dashboard';
       case 'ShopList':
-        return 'Shops Near You';
+        return 'Offers to Grab!';
         case 'StoreList':
           return 'Stores Near You';
   }

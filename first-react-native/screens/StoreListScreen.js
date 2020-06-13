@@ -40,7 +40,7 @@ async getStores()
           dataSource: responseJson.data,
         },
         function() {
-            console.log(this.state.dataSource)
+            //console.log(this.state.dataSource)
         }
 
       );
@@ -132,6 +132,7 @@ const styles = StyleSheet.create({
     padding: 20,
     marginVertical: 8,
     marginHorizontal: 16,
+
   },
   maintitle: {
     fontSize: 18,
