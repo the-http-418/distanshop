@@ -7,50 +7,6 @@ import { RectButton, ScrollView } from 'react-native-gesture-handler';
 //import { Avatar } from "react-native-elements";
 import { SafeAreaView,FlatList} from 'react-native';
 import Constants from 'expo-constants';
-const DATA = [
-  {
-    id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-    shop_name: 'Hari Vegetable Mart',
-    count:'3',
-    total: '10',
-    longitude:'77.736',
-    latitude:'12.99'
-  },
-  {
-    id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-    shop_name: 'Loyal City Market',
-    count:'14',
-    total: '15',
-    longitude:'78.736',
-    latitude:'13.99'
-  },
-  {
-    id: '58694a0f-3da1-471f-bd96-145571e29d72',
-    shop_name: 'Top n Town Superstore',
-    count:'5',
-    total: '20',
-    longitude:'77.746',
-    latitude:'12.9888'
-  },
-  {
-    id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f64',
-    shop_name: 'Star Bazaar',
-    count:'17',
-    total: '17',
-    longitude:'78.7436',
-    latitude:'13.989'
-  },
-  {
-    id: '58694a0f-3da1-471f-bd96-145571e29d75',
-    shop_name: 'Village HyperMarket',
-    count:'5',
-    total: '15',
-    longitude:'77.78846',
-    latitude:'12.98788'
-  },
-
-];
-
 function Item({ shop }) {
 const {store_name,customer_count,max_customers,store_size,employee_count} = shop
 
@@ -70,27 +26,31 @@ export default class StoreListScreen extends Component {
   		longitude:null,
       latitude:null,
       dataSource:null,
-      isLoading:true
+      isLoading:true,
+      test: false
   	};
+async getStores()
+{
+  fetch('https://http418-safely-app.herokuapp.com/get_store_data')
+    .then(response => response.json())
+    .then(responseJson => {
+      this.setState(
+        {
+          isLoading: false,
+          dataSource: responseJson.data,
+        },
+        function() {
+            console.log(this.state.dataSource)
+        }
 
+      );
+    })
+    .catch(error => {
+      console.error(error);
+    });
+}
     componentDidMount() {
-        return fetch('https://http418-safely-app.herokuapp.com/get_store_data')
-          .then(response => response.json())
-          .then(responseJson => {
-            this.setState(
-              {
-                isLoading: false,
-                dataSource: responseJson.data,
-              },
-              function() {
-                  console.log(this.state.dataSource)
-              }
-
-            );
-          })
-          .catch(error => {
-            console.error(error);
-          });
+        this.timer = setInterval(()=> this.getStores(), 1000)
       }
 
     findCoordinates = () => {
