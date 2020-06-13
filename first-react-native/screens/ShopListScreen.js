@@ -11,21 +11,36 @@ const DATA = [
   {
     id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
     shop_name: 'Hari Vegetable Mart',
+    count:'3',
+    total: '10',
+    longitude:'77.736',
+    latitude:'12.99'
   },
   {
     id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
     shop_name: 'Loyal City Market',
+    count:'14',
+    total: '15',
+    longitude:'78.736',
+    latitude:'13.99'
   },
   {
     id: '58694a0f-3da1-471f-bd96-145571e29d72',
     shop_name: 'Top n Town Superstore',
+    count:'5',
+    total: '20',
+    longitude:'77.746',
+    latitude:'12.9888'
   },
 ];
 
-function Item({ shop_name }) {
+function Item({ shop }) {
+const { id,shop_name,count,total,longitude,latitude } = shop;
   return (
     <View style={styles.item}>
-      <Text style={styles.title}>{shop_name}</Text>
+      <Text style={styles.maintitle}>{shop_name}</Text>
+        <Text style={styles.title}>Filled Capacity : {count} \ {total} </Text>
+        <Text style={styles.title}>Lon : {longitude} , Lat : {latitude} </Text>
     </View>
   );
 }
@@ -63,8 +78,9 @@ render()
     <SafeAreaView style={styles.container}>
       <FlatList
         data={DATA}
-        renderItem={({ item }) => <Item shop_name={item.shop_name} />}
+        renderItem={({ item }) => <Item shop={item} />}
         keyExtractor={item => item.id}
+
       />
     </SafeAreaView>
     </ScrollView>
@@ -108,6 +124,11 @@ const styles = StyleSheet.create({
     padding: 20,
     marginVertical: 8,
     marginHorizontal: 16,
+  },
+  maintitle: {
+    fontSize: 18,
+    fontWeight : 'bold',
+    color:'#FFFFFF'
   },
   title: {
     fontSize: 16,
