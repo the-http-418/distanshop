@@ -6,7 +6,7 @@ import { RectButton, ScrollView } from 'react-native-gesture-handler';
 //import { Avatar } from "react-native-elements";
 
 
-export default function LinksScreen() {
+export default function DashboardScreen() {
   return (
     <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
       <View style={styles.welcomeContainer}>
