@@ -52,23 +52,47 @@ const DATA = [
 ];
 
 function Item({ shop }) {
-const { id,shop_name,count,total,longitude,latitude } = shop
+const {store_name,customer_count,max_customers,store_size,employee_count} = shop
 
   return (
     <View style={styles.item}>
-      <Text style={styles.maintitle}>{shop_name}</Text>
-        <Text style={styles.title}>Filled Capacity : {count} \ {total} </Text>
-        <Text style={styles.title}>Lon : {longitude} , Lat : {latitude} </Text>
+      <Text style={styles.maintitle}>{store_name}</Text>
+        <Text style={styles.title}>Filled Capacity : {customer_count} \ {max_customers} </Text>
+        <Text style={styles.title}>Store Area (sq.ft) : {store_size} </Text>
+        <Text style={styles.title}>Employee Count : {employee_count} </Text>
     </View>
   );
 }
 
 
-export default class ShopListScreen extends Component {
+export default class StoreListScreen extends Component {
   state = {
   		longitude:null,
-      latitude:null
+      latitude:null,
+      dataSource:null,
+      isLoading:true
   	};
+
+    componentDidMount() {
+        return fetch('https://http418-safely-app.herokuapp.com/get_store_data')
+          .then(response => response.json())
+          .then(responseJson => {
+            this.setState(
+              {
+                isLoading: false,
+                dataSource: responseJson.data,
+              },
+              function() {
+                  console.log(this.state.dataSource)
+              }
+
+            );
+          })
+          .catch(error => {
+            console.error(error);
+          });
+      }
+
     findCoordinates = () => {
 		navigator.geolocation.getCurrentPosition(
 			position => {
@@ -96,9 +120,9 @@ render()
     <Text style={styles.checkwelcome}> Click on store to Check Safety</Text>
     <SafeAreaView style={styles.container}>
       <FlatList
-        data={DATA}
+        data={this.state.dataSource}
         renderItem={({ item }) => <Item shop={item} />}
-        keyExtractor={item => item.id}
+        keyExtractor={item => item.shop_name}
       />
     </SafeAreaView>
     </ScrollView>

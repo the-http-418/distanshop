@@ -5,7 +5,7 @@ import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import DashboardScreen from '../screens/DashboardScreen';
 import ShopListScreen from '../screens/ShopListScreen';
-
+import StoreListScreen from '../screens/StoreListScreen';
 const BottomTab = createBottomTabNavigator();
 const INITIAL_ROUTE_NAME = 'Home';
 
@@ -34,6 +34,14 @@ export default function BottomTabNavigator({ navigation, route }) {
         }}
       />
       <BottomTab.Screen
+        name="StoreList"
+        component={StoreListScreen}
+        options={{
+          title: 'Nearby',
+          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-cart" />,
+        }}
+      />
+      <BottomTab.Screen
         name="Dashboard"
         component={DashboardScreen}
         options={{
@@ -55,5 +63,7 @@ function getHeaderTitle(route) {
       return 'Profile Dashboard';
       case 'ShopList':
         return 'Shops Near You';
+        case 'StoreList':
+          return 'Stores Near You';
   }
 }
