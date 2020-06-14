@@ -1,4 +1,4 @@
-# Safelys
+# **Safelys** - Customer App
 Safelys helps you maintin social distance when in public places such as stores and restaurants.
 
 ## Features
